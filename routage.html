@@ -92,100 +92,41 @@
         <li class="breadcrumb-item">
           <a href="#">IFI PlayFramework</a>
         </li>
-        <li class="breadcrumb-item active">Contrôleur</li>
+        <li class="breadcrumb-item active">Routage</li>
       </ol>
 
-      <div class="col-md-12">
-        <h2>Créer un contrôleur</h2>
-        <br>
-        <div class="col-md-12">
-          <p>
-            Sur Play, pour créer un contrôleur, il faut utiliser la classe <code>play.mvc.Controller</code>:
-            <br><code>extends Controller</code>
-            <br>
-            Le contrôleur regroupe l'ensemble des <strong>actions</strong>.
-            <br><br>
-            <h5>Action</h5>
+      <div>
+        <h2>Routage HTTP</h2>
+		<div class="col-md-12">
+			<p>Le routeur permet de traduire chaque requête HTTP entrante en appel d'action.</p>
+			<br>
+			<h5>Fichier routes</h5>
 			<div class="col-md-12">
-            Une action gère une requête reçue par l'application Play et produit un résultat : <code>play.mvc.Result</code>.
-            <br>
-            <code>
-              public CompletionStage<Result> index() {<br>
-			  &nbsp;&nbsp;&nbsp;&nbsp;return ok(views.html.board.render(list, form));<br>
-              }<br>
-            </code>
-            <br>
-            Plusieurs type de réponse, dont:
-            <ul>
-              <li>
-                <code>Result ok = ok("OK :)");</code>
-              </li>
-              <li>
-                <code>Result notFound = notFound();</code>
-              </li>
-              <li>
-                <code>Result badRequest = badRequest(views.html.board.render(list, formWithErrors));</code>
-              </li>
-              <li>
-                <code>Result anyStatus = status(488, "Etrange réponse");</code>
-              </li>
-            </ul>
-            On peut également faire des redirections avec la méthode <code>redirect()</code> en ajoutant la redirection en paramètres.
-            <br>Pour inserer une redirection vers une méthode d'un contrôleur, on a la notion de <a href="routage.html#routageInverse"><strong>routage inverse</strong></a>.
-          </p>
-          <br></div>
-          <h5>Injection de dépendance</h5><div class="col-md-12">
-          <p>
-            Pour injecter des dépendances on utilise l'annotation <code>@Inject</code> au niveau du contrôleur.
-            <br>
-            <code>private final Service service;
-              <br>
-              @Inject<br>
-              public USController(Service service) {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;this.service = service;<br>
-              }
-            </code>
-          </p></div>
-        </div>
-        <br>
-        <h2>Contrôle asynchrone</h2><br>
-        <div class="col-md-12">
-          <p>
-              Sur Play, toutes les requêtes sont gérées de manière asynchrone.<br>
-              Il faut alors éviter de bloquer le code de l'application.
-          </p>
-          <p>
-              Pour que le code d'action soit le plus rapide possible, il faut renvoyer la <strong>promesse</strong> d'un résultat.
-          </p>
-          <p>
-            Java 8 fournit une API de promesse générique <code>CompletionStage</code>.
-            <br>Au lieu de renvoyer un <code>Result</code>, il faut envoyer un <code>CompletionStage<Result></code>.
-              <br>Cela permet de revenir à notre action sans rien bloquer.
-              <br><br>
-              <h5>CompletionStage</h5>
-			  <div class="col-md-12">
-              On a besoin d'une promesse pour créer un <code>CompletionStage<Result></code>.
-              <br>
-              <code>
-                CompletionStage<Double> promise = computePIAsynchronously();<br>
-                  // Runs in same thread<br>
-                  CompletionStage<Result> promiseOfResult = promiseOfPIValue.thenApply(pi -><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;ok("PI value computed: " + pi)<br>
-                    );
-              </code><br>
-              Ici, <code>thenApply</code> lance l'execution dans le même thread que la tâche précédente.
-              <br>
-              Pour pouvoir faire un appel asynchrone, il suffit d'appeler <code>thenApplyAsync</code>.
-              <br>
-              <br>
-              Si on n'appelle pas de promesse, on peut créer un objet <code>CompletionStage<Result></code>:
-                <br>
-                <code>
-                  CompletionStage<Integer> promise = CompletableFuture.supplyAsync(() -> computePIAsynchronously());
-                </code>
-				</div>
-          </p>
-        </div>
+				<p>Sur Play, les routes sont définis dans : conf/routes
+				<br>
+				On définit une route de la manière suivante : <br>
+				<code>
+				#commentaire <br>
+				GET &nbsp;&nbsp; /clients/:id &nbsp;&nbsp;&nbsp; controllers.Clients.show(id: Long)
+				</code>
+				<br>Attention à l'appel d'action, le type doit être déclaré après le nom suivi de ':' (comme en Scala)
+				<br><br>
+				<br>
+			</div>
+			<h5 id="routageInverse">Routage inverse</h5>
+			<div class="col-md-12">
+				<p>Le routage inverse est utilisé pour générer une URL à partir d'un appel Java.
+				<br>Pour chaque contrôleur, on a un 'reverse controller' dans le 'routes'</p>
+				
+				<p>Par exemple, si on a <br>
+				<code>GET &nbsp;&nbsp; /client/:name &nbsp;&nbsp;&nbsp;&nbsp; controllers.Clients.get(name: String)</code>
+				<br>
+				On peut inverser l'URL : <code>controllers.routes.Clients.get("Name")</code><br>
+				On peut l'utiliser dans la méthode : <code>redirect()</code>
+				</p>
+				
+			</div>
+		</div>
       </div>
 
     </div>
