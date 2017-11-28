@@ -159,12 +159,12 @@
           </p>
           <p>
             Java 8 fournit une API de promesse générique <code>CompletionStage</code>.
-            <br>Au lieu de renvoyer un <code>Result</code>, il faut envoyer un <code>CompletionStage<Result></code>.
+            <br>Au lieu de renvoyer un <code>Result</code>, il faut envoyer un <code>CompletionStage&lt;Result></code>.
               <br>Cela permet de revenir à notre action sans rien bloquer.
               <br><br>
               <h5>CompletionStage</h5>
 			  <div class="col-md-12">
-              On a besoin d'une promesse pour créer un <code>CompletionStage<Result></code>.
+              On a besoin d'une promesse pour créer un <code>CompletionStage&lt;Result></code>.
               <br>
               <code>
                 CompletionStage<Double> promise = computePIAsynchronously();<br>
@@ -178,7 +178,7 @@
               Pour pouvoir faire un appel asynchrone, il suffit d'appeler <code>thenApplyAsync</code>.
               <br>
               <br>
-              Si on n'appelle pas de promesse, on peut créer un objet <code>CompletionStage<Result></code>:
+              Si on n'appelle pas de promesse, on peut créer un objet <code>CompletionStage&lt;Result></code>:
                 <br>
                 <code>
                   CompletionStage<Integer> promise = CompletableFuture.supplyAsync(() -> computePIAsynchronously());

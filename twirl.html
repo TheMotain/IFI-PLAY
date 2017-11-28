@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>IFI Framework</title>
+  <!-- Bootstrap core CSS-->
+  <link href="web/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="web/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="web/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="web/css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">Play Framework</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="TP">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">TP</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="installation.html">
+            <i class="fa fa-fw fa-floppy-o"></i>
+            <span class="nav-link-text">Installation</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="controleur.html">
+            <i class="fa fa-fw fa-check-square-o"></i>
+            <span class="nav-link-text">Contrôleur</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="routage.html">
+            <i class="fa fa-fw fa-road"></i>
+            <span class="nav-link-text">Routage</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="twirl.html">
+            <i class="fa fa-fw fa-html5"></i>
+            <span class="nav-link-text">Twirl</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="ebean.html">
+            <i class="fa fa-fw fa-database"></i>
+            <span class="nav-link-text">Ebean</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="autres.html">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">Sessions et flash</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/HeleneMyr/IFI-PLAY">
+            <i class="fa fa-fw fa-github-square"></i>Github</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">IFI PlayFramework</a>
+        </li>
+        <li class="breadcrumb-item active">Twirl</li>
+      </ol>
+
+      <div>
+        <h2>Moteur de template Twirl</h2>
+        <p>Play est livré avec Twirl qui est basé sur Scala.<br><br>
+		Le typage des paramètres est spécifié en utilisant une syntaxe de suffixe<br>
+		Les types génériques doivent être défini avec des [] et non des <></p>
+		
+		<h5>Exemples</h5>
+		<div class="col-md-12">
+			<p>Le nom d'un fichier doit avoir la forme suivante : nom.scala.html 
+			<br>
+			Lors de la création de ce fichier, une vue : views.html.Application.nom est créée avec la méthode render().
+			<br>
+			On peut définir les variables utilisées dans la page en haut de la page : <br>
+			<code>@(story: Us, stories: List[Us])<br>
+			@(title: String = "Home")<br>
+			</code><br>
+			Les paramètres sont insérés dans le contrôleur de cette manière : <br>
+			<code>views.html.Application.nom.render(us, stories)</code><br><br>
+			Lorsqu'on souhaite faire une instruction dynamique, on utilise <strong>@</strong>.<br>
+			Si je veux accéder à ma variable 'story' défini en haut de mon fichier : <br>
+			<code>@us.name</code>
+			<br>Si plusieurs appels sont réalisés sur la même ligne, on doit écrire :<br>
+			<code>@(us.name + us.description)</code><br>
+			On peut utiliser des incolades si on a plusieurs instructions.<br><br>
+			<strong>Il ne faut pas mettre d'espaces entre les mots clés et les paramètres</strong><br><br>
+			Pour afficher le caractère '@', il suffit de mettre '@@'
+		</div>
+		
+		<h5>Code</h5>
+		<div class="col-md-12">
+			<ul>
+				<li>
+					Itération - boucle for : <br>
+					<code>@for(s <- stories) { <br>
+						&nbsp;&nbsp;&nbsp;&nbsp;s.name<br>
+					}</code><br>
+				</li>
+				<li>
+					Condition Si : <br>
+					<code>@if(stories.isEmpty()) { <br>
+						&nbsp;&nbsp;&nbsp;&nbsp;Vide<br>
+					} else {<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;stories.size();<br>
+					}</code><br>
+				</li>
+				<li>
+					Commentaires: <code>@* *@</code>
+				</li>
+			</ul>
+		</div>
+		
+		<h5>Blocs réutilisables</h5>
+		<div class="col-md-12">
+			<code>@display(story: Story) = {<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;@story.name<br>
+			}</code>
+		</div>
+		<br>
+		<h5>Import</h5>
+		<div class="col-md-12">
+			<code>@import utils._</code><br>
+			<code>@import helper._</code>
+		</div>
+		<br>
+		<h5>Utilisation des modèles en commun</h5>
+		<div class="col-md-12">
+			Un modèle 'views/main.scala.html' sera utilisé pour le modèle de présentation général:<br>
+			
+			<code>
+				@(title: String)(content: Html)<br>
+				&lt;!DOCTYPE html><br>
+				&nbsp;&nbsp;&lt;html><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;&lt;head><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title>@title&lt;/title><br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;&lt;/head><br>
+				  &nbsp;&nbsp;&lt;body><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;section class="content">@content&lt;/section><br>
+				  &nbsp;&nbsp;&lt;/body><br>
+				&lt;/html>
+			</code>
+			<br>
+			Dans tous les autres vues, on peut appeler le modèle de cette manière :<br>
+			<code>@main(title = "Titre") {<br>
+			&nbsp;&nbsp&nbsp;&nbspcontent<br>
+			}</code><br>
+			Les blocs de contenu Html doivent être décrit dans des incolades. On peut également en ajouter <br>
+			<code>@(title: String)(sidebar: Html)(content: Html)</code>
+			<br><code>@main("home"){<br>&nbsp;&nbsp;&lt;nav>sidebar&lt;/nav><br>} {<br>&nbsp;&nbsp;&lt;div>content&lt;/div><br>}</code>
+		</div><br>
+		
+		<h5>Formulaire</h5>
+		<div class="col-md-12">
+			Lors de la création d'un formulaire, on doit tout d'abord définir l'objet avec ses contraintes : <code>play.data.validation.Contraints</code><br>
+			<code> public class Us{<br>
+			&nbsp;&nbsp;@Required<br>
+			&nbsp;&nbsp;protected String name;
+			</code><br>
+			<br>
+			Pour envoyer la vue d'un formulaire, il faut définir un formulaire grâce à <code>play.data.FormFactory</code> (ne pas oublier d'injecter cette dépendance)
+			<br>Pour former l'objet on utilise <code>formFactory.form(Us.class);</code><br>
+			Si on doit récupérer les valeurs existances dans l'objet : <br>
+				<code>usForm.fill(us)</code><br><br>
+			Au niveau de la page html, on peut utiliser une aide au formulaire : <strong>helper</strong>.
+			<br><code>import helper._</code>
+			<br>
+				<code>@form(action = routes.USController.submit(){}</code>
+			<br>
+			L'action est décrite dans @form(action=.<br>
+			On peut créer tous les champs avec le @helper.<br>
+				<code>@form(action = routes.USController.submit(){<br>
+				&nbsp;&nbsp;@inputText(usForm("name")<br>}</code>
+			<br><br>
+			On peut ajouter des attributs à l'input : <code>@inputText(usForm("name"), 'id->"name")</code><br>
+			('_label, '_id, '_help, '_showConstraints, '_error et '_showErrors)
+			<br><br>
+			Lors de la réception de l'objet au niveau du contrôleur, on vérifie si les données sont correctes : <br>
+			<code>if (usForm.hasErrors()) {<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;return badRequest(views.html.index.render(usForm));<br>
+			}</code><br><br>
+			On peut également vérifier les données au niveau de twirl : <br>
+			<code>@if(form.hasGlobalErrors) {<br>
+				&nbsp;&nbsp;&lt;p class="error"><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;@for(error <- form.globalErrors) {<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p>@error.format(messages())&lt;/p><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+				&nbsp;&nbsp;&lt;/p><br>
+				}</code>
+				<br><br>
+				Une fois les valeurs vérifiées, on peut récupérer l'objet : <br>
+				<code>Us us = usForm.bindFromRequest().get();</code>
+				<br><br>
+				S'il faut extraire des données lors de la récupération, on a <code>DynamicForm</code><br>
+				<code>DynamicForm requestData = formFactory.form().bindFromRequest();</code>
+				<br><code>String name = requestData.get("name");</code><br><br>
+		</div>
+      </div>
+
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Louis - Alex - Hélène</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Bootstrap core JavaScript-->
+    <script src="web/vendor/jquery/jquery.min.js"></script>
+    <script src="web/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="web/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="web/vendor/chart.js/Chart.min.js"></script>
+    <script src="web/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="web/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="web/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="web/js/sb-admin-datatables.min.js"></script>
+    <script src="web/js/sb-admin-charts.min.js"></script>
+  </div>
+</body>
+
+</html>
