@@ -1,0 +1,5 @@
+# Messages
+
+stories.list.title={0,choice,0#Pas de User Story|1#Une User Story|1<{0,number,integer} users stories}
+
+
