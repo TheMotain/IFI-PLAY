@@ -1,4 +1,4 @@
-name := "play-java-ebean-example"
+name := "tp play ifi"
 
 version := "1.0.0-SNAPSHOT"
 
