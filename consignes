@@ -1,0 +1,94 @@
+1. faire un controller
+
+extends Controller
+
+2. méthode index() qui retourne la vue (board) avec une String
+
+ok(views.html.board.render(parameters ..)
+
+3. ajouter dans routes 
+
+GET /us	controller. ..
+
+-> aller sur localhost:9000/us
+
+4. importer le service 
+
+private final Us
+constructeur avec les parametres
+@Inject 
+
+renvoyer la méthode getAll du service
+
+Nous : A faire méthode 
+
+5. remplacer String par une liste et l'afficher dans une colonne de la table au niveau de la vue
+
+@for
+
+twirl
+
+6. base de données -> repository 
+
+select all
+
+expliquer ebean
+
+7. remplacer la liste en dur par l'appel au repository 
+
+-> vérifier que tout fonctionne 
+
+8. n'oubliez pas que play est réglé en asynchrone pour des raisons d'opti
+
+a. modifier le repository pour envoyer l'asynchrone (CompletionStage , supplyAsync, DatabaseExecutionContext )
+b. modifier le service
+c. modifier le controller (thenApplySync, httpExecutionContext à injecter)
+
+__________________________________________________
+
+
+1. vue du formulaire
+
+import _helper
+
+2. ajout du formulaire 
+
+form factory
+ne pas oublier de rajouter dans le fichier route
+
+
+3. controleur 
+
+récupérer les données avec bindFormRequest
+
+ * redirect 
+ * get -> récupérer l'objet
+ * formulaire detection erreur
+ * CompletableFuture.supplyAsync
+
+4.service
+
+5.repository 
+
+6. flash 
+
+à récupérer dans la vue 
+@if flash.containsKey("")
+flass.get
+
+7. afficher edition 
+
+vue : lien avec l'id
+routes !
+.fill pour récupérer les données dans l'objet formulaire
+formulaire et id à envoyer à la vue
+
+controller
+
+service: update
+
+
+1. routages
+2. ebean
+3. twirl (formulaire)
+4. session et flash
