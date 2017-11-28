@@ -92,12 +92,39 @@
         <li class="breadcrumb-item">
           <a href="#">IFI PlayFramework</a>
         </li>
-        <li class="breadcrumb-item active">TP</li>
+        <li class="breadcrumb-item active">Installation</li>
       </ol>
 
-      <div>
-        <h2>Kaban</h2>
-        <p>Le but de ce TP est de créer un tableau de gestion des UserStories</p>
+      <div class="col-md-12">
+
+        <h2>Récupération des sources</h2>
+          <div class="col-md-12">
+                  <p>Cloner le repository :</p>
+                  <code>
+                    git clone https://github.com/HeleneMyr/IFI-PLAY.git
+                  </code>
+          </div><br>
+        <h2>Installer sur IDE Eclipse</h2>
+        <div class="col-md-12">
+          <p>Le plugin sbteclipse permet d'importer des projets sbt sur eclipse.</p>
+
+          <code>
+              sbt<br>
+            > compile<br>
+            > eclipse
+          </code>
+
+          <div class="col-md-12">
+            <p>Clique droit > Import > General > Existing Projects into Workspace</p>
+            <img src="web/img/eclipse.png" alt="importation eclipse" height="400px" width="400px"/>
+            <p>Clique next > {choisir le projet} > Finish</p>
+          </div>
+        </div><br>
+
+        <h2>Installer sur IntelliJ IDEA</h2>
+        <div class="col-md-12">
+
+        </div>
       </div>
 
     </div>
