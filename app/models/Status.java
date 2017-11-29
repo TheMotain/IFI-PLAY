@@ -30,7 +30,7 @@ public enum Status{
 	  }
 	  
 		 
-	 public Map<String, String> getMap() {
+	 public static Map<String, String> getMap() {
 		 Map<String, String> map = new HashMap<>(); 
 		 map.put(String.valueOf(TODO.getId()), TODO.getName());
 		 map.put(String.valueOf(IN_PROGRESS.getId()), IN_PROGRESS.getName());
