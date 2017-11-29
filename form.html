@@ -121,11 +121,16 @@
       <code>import helper._</code>
       <p>On définit un formulaire de cette manière</p>
 
-				<code>@form(action = routes.USController.submit(){}</code>
+				<code>@form(action = routes.USController.submit(){<br>
+          &nbsp;&nbsp; @CSRF.formField<br>
+        }</code>
 			<br>
+      Il faut mettre l'annotation
+      <br>
 			L'action est décrite dans @form(action=.<br><br>
 			On peut créer tous les champs avec le @helper.<br>
 				<code>@form(action = routes.USController.submit(){<br>
+          &nbsp;&nbsp; @CSRF.formField<br>
 				&nbsp;&nbsp;@inputText(usForm("name")<br>}</code>
 			<br><br>
 			On peut ajouter des attributs à l'input : <code>@inputText(usForm("name"), 'id->"name")</code><br>

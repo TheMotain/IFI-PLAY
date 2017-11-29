@@ -191,50 +191,10 @@
 			<br><code>@main("home"){<br>&nbsp;&nbsp;&lt;nav>sidebar&lt;/nav><br>} {<br>&nbsp;&nbsp;&lt;div>content&lt;/div><br>}</code>
 		</div><br>
 
-		<h5>Formulaire</h5>
+		<h5>Routage</h5>
 		<div class="col-md-12">
-			Lors de la création d'un formulaire, on doit tout d'abord définir l'objet avec ses contraintes : <code>play.data.validation.Contraints</code><br>
-			<code> public class Us{<br>
-			&nbsp;&nbsp;@Required<br>
-			&nbsp;&nbsp;protected String name;
-			</code><br>
-			<br>
-			Pour envoyer la vue d'un formulaire, il faut définir un formulaire grâce à <code>play.data.FormFactory</code> (ne pas oublier d'injecter cette dépendance)
-			<br>Pour former l'objet on utilise <code>formFactory.form(Us.class);</code><br>
-			Si on doit récupérer les valeurs existances dans l'objet : <br>
-				<code>usForm.fill(us)</code><br><br>
-			Au niveau de la page html, on peut utiliser une aide au formulaire : <strong>helper</strong>.
-			<br><code>import helper._</code>
-			<br>
-				<code>@form(action = routes.USController.submit(){}</code>
-			<br>
-			L'action est décrite dans @form(action=.<br>
-			On peut créer tous les champs avec le @helper.<br>
-				<code>@form(action = routes.USController.submit(){<br>
-				&nbsp;&nbsp;@inputText(usForm("name")<br>}</code>
-			<br><br>
-			On peut ajouter des attributs à l'input : <code>@inputText(usForm("name"), 'id->"name")</code><br>
-			('_label, '_id, '_help, '_showConstraints, '_error et '_showErrors)
-			<br><br>
-			Lors de la réception de l'objet au niveau du contrôleur, on vérifie si les données sont correctes : <br>
-			<code>if (usForm.hasErrors()) {<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;return badRequest(views.html.index.render(usForm));<br>
-			}</code><br><br>
-			On peut également vérifier les données au niveau de twirl : <br>
-			<code>@if(form.hasGlobalErrors) {<br>
-				&nbsp;&nbsp;&lt;p class="error"><br>
-					&nbsp;&nbsp;&nbsp;&nbsp;@for(error <- form.globalErrors) {<br>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p>@error.format(messages())&lt;/p><br>
-					&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-				&nbsp;&nbsp;&lt;/p><br>
-				}</code>
-				<br><br>
-				Une fois les valeurs vérifiées, on peut récupérer l'objet : <br>
-				<code>Us us = usForm.bindFromRequest().get();</code>
-				<br><br>
-				S'il faut extraire des données lors de la récupération, on a <code>DynamicForm</code><br>
-				<code>DynamicForm requestData = formFactory.form().bindFromRequest();</code>
-				<br><code>String name = requestData.get("name");</code><br><br>
+			Pour gérer les liens et les actions au niveau des vues, il suffit d'appeler <code>@routes.Controller.method()</code><br>
+      <a href="routage.html">Pour plus d'informations</a><br>
 		</div>
       </div>
 

@@ -108,20 +108,21 @@
         <ol>
           <li><a href="installation.html">Clonez et setup le projet sur votre IDE préféré.</a></li>
           <li>
-              Réaliser un <a href="controleur.html">controlleur</a> <code>BoardController.java</code>. <br />
-              Ce controlleur va nous servir de point d'entrée des requêtes HTTP.
+              Réaliser un <a href="controleur.html">contrôleur</a> <code>BoardController.java</code> (dans le package <code>app.controllers</code>). <br />
+              Ce contrôleur va nous servir de point d'entrée des requêtes HTTP.
           </li>
           <li>
-              Dans ce controller, créer une méthode <code>index()</code> qui va renvoyer la réponse <code>ok()</code> avec la vue board.scala.html.<br />
-              Pour passer un paramètre à cette vue, il suffit de donner le paramètre à la fonction render() (<code>views.html.board.render(monParam)</code>).<br />
+              Dans ce contrôleur, créer une méthode <code>index()</code> qui va renvoyer la réponse <code>ok()</code> avec la vue board.scala.html.<br />
+              Pour passer un paramètre à cette vue, il suffit de donner le paramètre à la fonction render() (<code>views.html.board.render(param)</code>).<br />
               Afin que la vue accepte ce paramètre, ajoutez sur la première ligne de la vue <code>board</code> le type des paramètres : <br />
-              <code>@(param: TypeParam)</code>
+              <code>@(param: TypeParam)</code><br/>
+              Faites afficher "hello" à la vue<br />
           </li>
           <li>
-            Ajoutez la <a href="routage.html">route</a> permettant d'accéder à la méthode du controller dans le fichier <code>conf/routes</code>.
+            Ajoutez la <a href="routage.html">route</a> permettant d'accéder à la méthode du contrôleur dans le fichier <code>conf/routes</code>. (chemin : "/")
           </li>
           <li>
-            Regardez le resultat de votre travail sur <code>http://localhost:9000/votreRoute</code>
+            Regardez le resultat de votre travail sur <code>http://localhost:9000/</code>. N'oubliez pas de lancer sbt : <code>./sbt run</code>
           </li>
         </ol>
         <p>
@@ -131,16 +132,17 @@
         <ol>
           <li>
             Pour cela, il va falloir aller chercher la liste des tâches à l'aide du service <code>TaskService.java</code>.<br />
-            Pour accéder à ce service, il faut l'importer dans le constructeur du controlleur à l'aide de l'annotation <code>@Inject</code>.
+            Pour accéder à ce service, il faut l'importer dans le constructeur du contrôleur <code>BoardController</code> à l'aide de l'annotation <code>@Inject</code>.
           </li>
           <li>
-            Une fois ijecté, vous allez pouvoir récupérer une <code>List&lt;Task></code> à l'aide de la fonction getAll() du service.<br />
+            Une fois injecté, il faut récupérer une <code>List&lt;Task></code> à l'aide de la fonction getAll() du service.<br />
             Pour le moment, cette fonction renvoie une liste de tâches en dur.
           </li>
           <li>
-            Vous avez maintenant une liste de tâche dans votre méthode index() de votre controller. Il va donc falloir l'envoyer dans votre vue afin de l'afficher.<br />
-            Remplacez la string en paramètre de votre vue par votre liste de tâches et ajuster le type du paramètre en haut de votre vue.<br />
-            Il faut maintenant afficher cette liste. La fonction <a href="twirl.html">twirl</a> <code>@for</code>
+            Vous avez maintenant une liste de tâche dans votre méthode index() de votre contrôleur. Il va donc falloir l'envoyer dans votre vue afin de l'afficher.<br />
+            Remplacez le paramètre ("hello") de votre vue par votre liste de tâches et ajuster le type du paramètre en haut de votre vue. (typage en Scala)<br />
+            Il faut maintenant afficher cette liste grâce à la fonction <a href="twirl.html">twirl</a> <code>@for</code><br>
+            Pour le moment, vous pouvez seulement l'afficher, on verra par la suite l'affichage dans la table.
           </li>
         </ol>
         <p>
@@ -148,26 +150,26 @@
           Cependant ces données sont codés en dur dans le service. Le but sera maintenant de remplacer ces données en dur par un appel au "repository" et à la base de donnée.
         </p>
         <ol>
-          <li>Ouvrez maintenant le fichier TaskRepository.java et créer-y une fonction findAll() qui retournera une liste de tâches.</li>
+          <li>Ouvrez maintenant le fichier TaskRepository.java et créez-y une fonction findAll() qui retournera une liste de tâches.</li>
           <li>
-            Dans cette fonction, utilisez les fonctionnalités de <a href="ebean.html">EbeanServer</a> afin de retourner la liste des tâches de la base de données.<br />
+            Dans cette fonction, utilisez les fonctionnalités de <a href="ebean.html">EbeanServer</a> afin de retourner la liste des tâches de la base de données (List&lt;Task>).<br />
             Dans un premier temps, cette fonction sera synchrone.
           </li>
           <li>
             Remplacez maintenant le code dans le service afin d'appeler votre fonction findAll du repository. (Injectez le TaskRepository si nécessaire).<br />
-            Vous devriez avoir une autre liste de tâches affiché dans votre page, félicitaion si c'est le cas !
+            Vous devriez avoir une autre liste de tâches affiché dans votre page, félicitation si c'est le cas !
           </li>
           <li>
             Malheuresement, ce code ne respecte pas le principe asynchrone de play. Il ne sera pas très scalable :(<br />
             Pour régler ce problème, il va falloir modifier le code de votre fonction <code>findAll</code> afin de le rendre asynchrone. Pour cela, allez voir le <a href="ebean.html">principe de l'asyncrhone</a>
           </li>
           <li>
-            Il va enfin falloir répercuter ce changement dans le reste du code (controlleur et service).<br />
-            Ajustez leur type de retour et dans le controlleur, modifier votre code afin de gérer l'asynchrone. (voir <a href="controleur.html">Contexte d'exécution : HttpExecutionContext pour le contrôleur</a>)
+            Il va enfin falloir répercuter ce changement dans le reste du code (contrôleur et service).<br />
+            Ajustez leur type de retour et dans le contrôleur, modifier votre code afin de gérer l'asynchrone. (voir <a href="controleur.html">Contexte d'exécution : HttpExecutionContext pour le contrôleur</a>)
           </li>
         </ol>
         <p>
-          Votre code devrait faire exactement la même chose mais en asynchrone... Félicitation ! ;)
+          Votre code devra faire exactement la même chose mais en asynchrone... Félicitation ! ;)
         </p>
         <h2>Partie 2 : Création une tâche</h2>
         <p>
@@ -177,43 +179,44 @@
 
         <ol>
           <li>
-            Créer une nouvelle vue <code>create.scala.html</code>. N'oubliez pas d'ajouter le <code>@main(title) {...}</code> afin de récupérer le code html de base.
+            Créer une nouvelle vue <code>create.scala.html</code>. N'oubliez pas d'ajouter le <code>@main(title) {...}</code> afin de récupérer le template html de base.
           </li>
           <li>
-            Modifier le lien du bouton dans la vue board afin de rediriger vers la vue create.
+            Créer une nouvelle méthode <code>createForm()</code> dans le contrôleur <code>BoardController</code> afin d'afficher cette vue. (ajoutez votre route dans le ficher routes)
           </li>
           <li>
-            Créer une nouvelle méthode <code>createForm()</code> dans le controlleur afin d'afficher cette vue. (ajoutez votre route dans le ficher routes)
-          </li>
-          <li>
-            Dans cette même méthode, créez un objet <a href="form.html"><code>Form</code></a> de type générique <code>Task</code> à l'aide de la factory.
+            Dans cette même méthode, créez un objet <a href="form.html"><code>Form</code></a> de type générique <code>Task</code> à l'aide de la factory (<code>FormFactory</code>).
           </li>
           <li>
             Dans la vue create, créez un formulaire de création de tâche associé à votre objet form à l'aide des <a href="form.html">helpers twirl</a>.
           </li>
           <li>
-            Votre formulaire va pointer vers une action (une méthode d'un controller). <br />
-            Créez donc votre méthode create() dans votre controller et faites pointer le formulaire vers cette méthode.<br />
+            Votre formulaire va pointer vers une action (une méthode d'un contrôleur). <br />
+            Créez donc votre méthode <code>create()</code> dans votre contrôleur et faites pointer le formulaire vers cette méthode.<br />
             N'oubliez pas d'ajouter la route associée dans votre fichier routes !
           </li>
           <li>
-            Pour récupérer les informations entrées dans le formulaire, il va falloir créer un objet Form à l'aide de la factory dans votre controlleur update.<br />
+            Pour récupérer les informations entrées dans le formulaire, il va falloir créer un objet Form à l'aide de <code>FormFactory</code> dans la méthode <code>create()</code>.<br />
             Ensuite, il va falloir récupérer les valeurs du formulaire dans notre objet form à l'aide de la <a href="form.html">bonne fonction</a>.
           </li>
           <li>
-            Vous devriez avoir un objet Form dans votre controller comportant les valeurs entrées dans les champs du formulaire.<br />
-            Créez maintenant le service et repository associé pour sauvgarder votre Tâche.
+            Vous devriez avoir un objet Form dans votre contrôleur comportant les valeurs entrées dans les champs du formulaire.<br />
+            Créez maintenant le service et repository associé pour sauvegarder votre Tâche.<br/>
+            Le service se chargera seulement d'appeler la méthode du répository (<code>insert</code>)<br />
           </li>
           <li>
-            Une fois de retour dans votre controlleur, il va falloir <a href="controleur.html">rediriger</a> l'utilisateur vers la page d'affichage.
+            Une fois de retour dans votre contrôleur, il va falloir <a href="controleur.html">rediriger</a> l'utilisateur vers la page d'affichage.
           </li>
           <li>
-            Maintenant, gérez les erreurs dans votre formulaire.<br />
-            Si le formulaire est valide, la tâche est créée et l'utilisateur redirigé sur la liste des tâches.<br />
-            Sinon, l'utilisateur est redirigé sur la liste des tâches avec un message d'erreur. Utilisez <a href="autres.html">flash</a> pour gérer l'erreur !
+            Maintenant, gérez les erreurs dans votre formulaire au niveau du contrôleur.<br />
+            Si le formulaire est valide, la tâche est créée et l'utilisateur est redirigé sur la liste des tâches.<br />
+            Sinon, l'utilisateur est redirigé sur le formulaire avec un message d'erreur. Utilisez <a href="autres.html">flash</a> pour gérer l'erreur !
           </li>
           <li>
-            Si ce n'est pas fait, modifier votre Repository pour effectuer la requête en asynchrone et répercutez ce changement dans votre service et votre controller.<br />
+            Si ce n'est pas fait, modifier votre Repository pour effectuer la requête en asynchrone et répercutez ce changement dans votre service et votre contrôleur.<br />
+          </li>
+          <li>
+            Modifier le lien du bouton dans la vue <code>board</code> afin de rediriger vers la vue <code>create</code>.
             Vous devriez maintenant être capable d'ajouter une tâche à la liste.
           </li>
         </ol>
@@ -222,28 +225,37 @@
         </p>
         <h2>Partie 3 - Edition d'une tâche</h2>
         <p>
-          Le but de cette partie est d'éditer une tâche afin de changer son status (TODO, IN PROGRESS, READY FOR TEST, DONE).<br />
+          Le but de cette partie est d'éditer une tâche afin de changer seulement son status (TODO, IN PROGRESS, READY FOR TEST, DONE).<br />
           Pour cela, une édition de la tâche sera nécessaire.<br />
         </p>
         <ol>
-          Dans un premier temps, affichez les tâches en les plaçant dans la bonne colonne du tableau. (<code>@if</code>).
+          Dans un premier temps, affichez les tâches en les plaçant dans la bonne colonne du tableau. <a href="codeTwirl.html">(<code>@if</code>)</a>.
         </ol>
         <ol>
           Modifiez l'affichage de vos tâches pour ajouter un lien menant vers un formulaire d'édition.<br />
           Vous devez donc :
           <ul>
-            <li>Créer une méthode <code>edit(id)</code> dans le controlleur</li>
+            <li>Créer une méthode <code>edit(id)</code> dans le contrôleur</li>
             <li>Créer une vue <code>edit.scala.html</code></li>
             <li>Ajouter la route</li>
-            <li>Créer un ensemble service + repository afin de récupérer une tâche à partir de son id</li>
-            <li>Dans le controlleur, afficher la vue avec un formulaire rempli déjà rempli avec la tâche récupérée</li>
-            <li>Créer un formulaire dans votre vue "edit" qui pointe vers une autre méthode <code>update(id)</code></li>
-            <li>Créer un ensemble service + repository afin de mettre à jour une tâche</li>
+            <li>Créer un ensemble service + repository afin de récupérer une tâche à partir de son id et d'envoyer la tâche</li>
+            <li>Dans le contrôleur, donner à la vue un formulaire déjà rempli avec la tâche récupérée et un objet Map&lt;String, String> contenant représentant les status (méthode <code>getMap()</code> dans <code>Status</code>).<br> Cette map permettra de générer le select des status (voir ci-dessous)</li>
+            <li>Créer un formulaire dans votre vue <code>edit</code> qui pointe vers une autre méthode <code>update(id)</code><br>
+              Votre formulaire contiendra un input pour la description et un select pour le status de la tâche<br>
+              Le <strong>helper</strong> propose un object @select qui génère la balise select automatiquement. Il faut donc donner une map pour qu'il gère les options du select.<br>
+            <code>@select(<br>
+              &nbsp;&nbsp;taskForm("status"), <br>
+              &nbsp;&nbsp;options(status),<br>
+              &nbsp;&nbsp;'_label -> "Status", '_default -> "-- Choisir un status --",<br>
+              &nbsp;&nbsp;'_showConstraints -> false<br>
+              )</code><br>
+            </li>
+            <li>Créer un ensemble service + repository afin de mettre à jour la tâche</li>
             <li>Dans la méthode <code>update(id)</code> enregistrez la nouvelle tâche et redirigez vers la liste des tâches en cas de succès ou vers le formulaire d'édition en cas d'echec.</li>
           </ul>
         </ol>
         <p>
-          Vous devriez maintenant être capable de modifier une tâche (nom, description, status) et le status devrait définir dans quelle colonne afficher la tâche.
+          Vous devriez maintenant être capable de modifier une tâche (status) et le status devrait définir dans quelle colonne afficher la tâche.
           N'oubliez pas de réaliser tout cela en asynchrone ! ;)
         </p>
 
@@ -253,7 +265,7 @@
         </p>
         <ul>
           <li>Créer une page de login avec un champ "nom" et stocker ce nom en session pour l'afficher en titre de chaque page.</li>
-          <li>Les status sont gérés avec un <code>enum</code>. Changez cela pour enregistrer ces status en base !</li>
+          <li>Les status sont gérés avec un <code>enum</code>. Changez cela pour enregistrer ces status en base de données!</li>
         </ul>
       </div>
 
