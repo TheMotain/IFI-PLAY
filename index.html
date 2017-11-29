@@ -214,7 +214,9 @@
             Sinon, l'utilisateur est redirigé sur le formulaire avec un message d'erreur. Utilisez <a href="autres.html">flash</a> pour gérer l'erreur !
           </li>
           <li>
-            Si ce n'est pas fait, modifier votre Repository pour effectuer la requête en asynchrone et répercutez ce changement dans votre service et votre contrôleur.<br />
+            Si ce n'est pas fait, modifier votre Repository pour effectuer la requête en asynchrone et répercutez ce changement dans votre service et votre contrôleur.<br/>
+            N'oubliez pas de mettre le contexte courant d'execution <code>HttpExecutionContext</code> . Pour plus d'information, voir le bas de la page <a href="controleur.html">Contrôleur</a>
+            <br />
           </li>
           <li>
             Modifier le lien du bouton dans la vue <code>board</code> afin de rediriger vers la vue <code>create</code>.
@@ -222,7 +224,7 @@
           </li>
         </ol>
         <p>
-          Félicitaiton, vous avez maintenant un formulaire de création de tâche ! :)
+          Félicitation, vous avez maintenant un formulaire de création de tâche ! :)
         </p>
         <h2>Partie 3 - Edition d'une tâche</h2>
         <p>
