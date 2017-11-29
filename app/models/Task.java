@@ -1,11 +1,7 @@
 package models;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.persistence.Entity;
 import javax.persistence.PrePersist;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints;
 
