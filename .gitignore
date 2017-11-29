@@ -15,6 +15,5 @@ dist
 .settings
 .target
 .cache
-bin
 .DS_Store
 activator-sbt-*-shim.sbt
