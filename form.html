@@ -98,123 +98,63 @@
         <li class="breadcrumb-item">
           <a href="#">IFI PlayFramework</a>
         </li>
-        <li class="breadcrumb-item active">Contrôleur</li>
+        <li class="breadcrumb-item active">Twirl</li>
       </ol>
 
-      <div class="col-md-12">
-        <h2>Créer un contrôleur</h2>
-        <br>
-        <div class="col-md-12">
-          <p>
-            Sur Play, pour créer un contrôleur, il faut utiliser la classe <code>play.mvc.Controller</code>:
-            <br><code>extends Controller</code>
-            <br>
-            Le contrôleur regroupe l'ensemble des <strong>actions</strong>.
-            <br><br>
-            <h5>Action</h5>
-			<div class="col-md-12">
-            Une action gère une requête reçue par l'application Play et produit un résultat : <code>play.mvc.Result</code>.
-            <br>
-            <code>
-              public CompletionStage<Result> index() {<br>
-			  &nbsp;&nbsp;&nbsp;&nbsp;return ok(views.html.board.render(list, form));<br>
-              }<br>
-            </code>
-            <br>
-            Plusieurs type de réponse, dont:
-            <ul>
-              <li>
-                <code>Result ok = ok("OK :)");</code>
-              </li>
-              <li>
-                <code>Result notFound = notFound();</code>
-              </li>
-              <li>
-                <code>Result badRequest = badRequest(views.html.board.render(list, formWithErrors));</code>
-              </li>
-              <li>
-                <code>Result anyStatus = status(488, "Etrange réponse");</code>
-              </li>
-            </ul>
-            On peut également faire des redirections avec la méthode <code>redirect()</code> en ajoutant la redirection en paramètres.
-            <br>Pour inserer une redirection vers une méthode d'un contrôleur, on a la notion de <a href="routage.html#routageInverse"><strong>routage inverse</strong></a>.
-          </p>
-          <br></div>
-          <h5>Injection de dépendance</h5><div class="col-md-12">
-          <p>
-            Pour injecter des dépendances on utilise l'annotation <code>@Inject</code> au niveau du contrôleur.
-            <br>
-            <code>private final Service service;
-              <br>
-              @Inject<br>
-              public USController(Service service) {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;this.service = service;<br>
-              }
-            </code>
-          </p></div>
-        </div>
-        <br>
-        <h2>Contrôle asynchrone</h2><br>
-        <div class="col-md-12">
-          <p>
-              Sur Play, toutes les requêtes sont gérées de manière asynchrone.<br>
-              Il faut alors éviter de bloquer le code de l'application.
-          </p>
-          <p>
-              Pour que le code d'action soit le plus rapide possible, il faut renvoyer la <strong>promesse</strong> d'un résultat.
-          </p>
-          <p>
-            Java 8 fournit une API de promesse générique <code>CompletionStage</code>.
-            <br>Au lieu de renvoyer un <code>Result</code>, il faut envoyer un <code>CompletionStage&lt;Result></code>.
-              <br>Cela permet de revenir à notre action sans rien bloquer.
-              <br><br>
-              <h5>CompletionStage</h5>
-			  <div class="col-md-12">
-              On a besoin d'une promesse pour créer un <code>CompletionStage&lt;Result></code>.
-              <br>
-              <code>
-                CompletionStage<Double> promise = computePIAsynchronously();<br>
-                  // Runs in same thread<br>
-                  CompletionStage<Result> promiseOfResult = promiseOfPIValue.thenApply(pi -><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;ok("PI value computed: " + pi)<br>
-                    );
-              </code><br>
-              Ici, <code>thenApply</code> lance l'execution dans le même thread que la tâche précédente.
-              <br>
-              Pour pouvoir faire un appel asynchrone, il suffit d'appeler <code>thenApplyAsync</code>.
-              <br>
-              <br>
-              Si on n'appelle pas de promesse, on peut créer un objet <code>CompletionStage&lt;Result></code>:
-                <br>
-                <code>
-                  CompletionStage<Integer> promise = CompletableFuture.supplyAsync(() -> computePIAsynchronously());
-                </code>
-                <br>
-                <p>Il faut <strong>toujours mettre le contexte d'execution</strong> lorsqu'on utilise <code>CompletionStage</code>.
-                <br>
-              <p>Le contexte d'execution Http est HttpExecutionContext (voir ci-dessous).<br>Un contexte d'execution existe aussi lors des requêtes en base de données: <a href="/ebean">DatabaseExecutionContext</a></p>
-            </p>
-				</div>
-        <h5>Contexte d'exécution : HttpExecutionContext pour le contrôleur</h5>
-          <div class="col-md-12">
-            <p>Pour garantir que le contexte reste à portée de main, il faut toujours l'envoyer dans une requête asynchrone</p>
-            <p>Il faut tout d'abord injecter la dépendance : <br>
-              <code>private HttpExecutionContext httpExecutionContext;<br>
-              @Inject<br>
-              public USController(HttpExecutionContext ex) {<br>
-              &nbsp;&nbsp;this.httpExecutionContext = ex;<br>
-            }</code>
-            <br>
-            Au moment de la définition de l'appel asynchrone : <br>
-            <code>public CompletionStage&lt;Result> index() {<br>
-            &nbsp;return calcul().thenApplyAsync(() -> {<br>
-              ...<br>
-            }, httpExecutionContext.current());<br>}
-        </p>
-          </div>
-          </p>
-        </div>
+      <div>
+        <h2>Formulaire</h2>
 
+		<div class="col-md-12">
+			<p>Lors de la création d'un formulaire, on doit tout d'abord définir l'objet avec ses contraintes : <code>play.data.validation.Contraints</code><br>
+			<code> public class Us{<br>
+			&nbsp;&nbsp;@Required<br>
+			&nbsp;&nbsp;protected String name;
+    </code></p>
+			<p>Pour envoyer la vue d'un formulaire, il faut définir un formulaire grâce à <code>play.data.FormFactory</code> (ne pas oublier d'injecter cette dépendance)
+			<br>Pour former l'objet on utilise <code>formFactory.form(Us.class);</code><br>
+			Si on doit récupérer les valeurs existances dans l'objet au niveau de la vue:<br>
+				<code>usForm.fill(us)</code></p>
+			<p>Au niveau de la page html, on peut utiliser une aide au formulaire : <strong>helper</strong>.
+      </p>
+      <h5>Helper</h5>
+      <p>Il faut importer le module helper au niveau de la vue.</p>
+      <code>import helper._</code>
+      <p>On définit un formulaire de cette manière</p>
+
+				<code>@form(action = routes.USController.submit(){}</code>
+			<br>
+			L'action est décrite dans @form(action=.<br><br>
+			On peut créer tous les champs avec le @helper.<br>
+				<code>@form(action = routes.USController.submit(){<br>
+				&nbsp;&nbsp;@inputText(usForm("name")<br>}</code>
+			<br><br>
+			On peut ajouter des attributs à l'input : <code>@inputText(usForm("name"), 'id->"name")</code><br>
+			('_label, '_id, '_help, '_showConstraints, '_error et '_showErrors)
+			<br><br>
+      <h5>Récupération du formulaire au niveau du contrôleur</h5>
+      <p> Pour récupérer un objet du formulaire (pas besoin de le passer en paramètre): <br>
+        <code>formFactory.form(Us.class).bindFromRequest()</code>
+      </p>
+			On vérifie ensuite si les données sont correctes : <br>
+			<code>if (usForm.hasErrors()) {<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;return badRequest(views.html.index.render(usForm));<br>
+			}</code><br>
+			On peut également vérifier les données au niveau de twirl : <br>
+			<code>@if(form.hasGlobalErrors) {<br>
+				&nbsp;&nbsp;&lt;p class="error"><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;@for(error <- form.globalErrors) {<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p>@error.format(messages())&lt;/p><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+				&nbsp;&nbsp;&lt;/p><br>
+				}</code>
+				<br>
+				Une fois les valeurs vérifiées, on peut récupérer l'objet de cette manière: <br>
+				<code>Us us = usForm.bindFromRequest().get();</code>
+				<br><br>
+				S'il faut extraire des données lors de la récupération, on a <code>DynamicForm</code><br>
+				<code>DynamicForm requestData = formFactory.form().bindFromRequest();</code>
+				<br><code>String name = requestData.get("name");</code><br><br>
+		</div>
       </div>
 
     </div>
