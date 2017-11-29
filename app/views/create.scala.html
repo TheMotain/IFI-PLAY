@@ -1,0 +1,9 @@
+@(taskForm: Form[Task])
+@import helper._
+@main("Create task"){
+	@form(action = routes.BoardController.create()){
+		@CSRF.formField
+		@inputText(taskForm("name"), 'id->"name")
+		<input type="submit"/>
+	}
+}

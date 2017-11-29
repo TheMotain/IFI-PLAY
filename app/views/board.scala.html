@@ -1,3 +1,4 @@
+@(param: List[Task])
 @main("Taskboard"){
 <div class="col-md-12">
 	<div class="row">
@@ -8,6 +9,11 @@
 				@for(sta <- Status.values()) {
 					<th id="@sta.getId()">@sta.getName()</th>
 				}
+				@for(tsk <- param){
+					<tr>
+						<td>@tsk.getName @tsk.getStatus<td>
+					</tr>
+				}
 			</thead>
 			<tbody>
 				<!-- Listez les tâches ici -->
@@ -15,7 +21,7 @@
 		</table>
 		</div>
 		<div class="col-md-2">
-			<a href="#"><button class="btn btn-primary">Ajouter une t&acirc;che</button></a>
+			<a href="/createForm"><button class="btn btn-primary">Ajouter une t&acirc;che</button></a>
 		</div>
 	</div>
 </div>

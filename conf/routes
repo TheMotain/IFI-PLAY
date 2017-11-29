@@ -4,4 +4,6 @@
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
+GET     /                           controllers.BoardController.index()
+GET     /createForm					controllers.BoardController.createForm()
+POST    /createForm                 controllers.BoardController.create()

@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletionStage;
 
 import javax.inject.Inject;
 
@@ -15,6 +16,9 @@ public class TaskService {
 
 	private final List<Task> stories;
 
+	@Inject
+	TaskRepository taskRepository;
+	
     @Inject
     public TaskService() {
         this.stories = new ArrayList<>();
@@ -22,8 +26,12 @@ public class TaskService {
         this.stories.add(new Task(2L, "Avoir son Master", "Vivement le stage"));
     }
     
-    public List<Task> getAll() {
-    	return this.stories;
+    public CompletionStage<List<Task>> getAll() {
+    	return taskRepository.findAll();
     }
+
+	public void save(Task task) {
+		taskRepository.save(task);
+	}
     
 }
