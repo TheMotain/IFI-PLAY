@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints;
@@ -26,6 +27,12 @@ public class Task extends BaseModel{
 		 this.name = name;
 		 this.description = description;
 		 this.status = 1L;
+	 }
+	 
+	 @PrePersist
+	 void preInsert() {
+	    if (this.status == null)
+	        this.status = 1L;
 	 }
 
 }
