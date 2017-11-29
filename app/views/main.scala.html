@@ -22,22 +22,15 @@
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="#">@title</a>
-    <a class="navbar-brand" href="#">@session.get("login")</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="@routes.TaskboardController.index()">
+          <a class="nav-link" href="/">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Taskboard</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="@routes.USController.getAllStories()">
-            <i class="fa fa-fw fa-book"></i>
-            <span class="nav-link-text">Users Stories</span>
+            <span class="nav-link-text">Board</span>
           </a>
         </li>
       </ul>
@@ -63,7 +56,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>TaskBoard 2017</small>
+          <small>Board 2017</small>
         </div>
       </div>
     </footer>
