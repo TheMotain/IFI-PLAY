@@ -1,5 +1,8 @@
 package models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +19,6 @@ public class Task extends BaseModel{
 	 
 	 public String description;
 	 
-	 @NotNull
 	 public Long status;
 	 
 	 public Task(Long id, String name, String description) {
@@ -25,8 +27,5 @@ public class Task extends BaseModel{
 		 this.description = description;
 		 this.status = 1L;
 	 }
-	 
-	 public void init() {
-		 this.id = System.currentTimeMillis();
-	 }
+
 }

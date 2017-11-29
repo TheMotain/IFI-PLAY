@@ -1,5 +1,8 @@
 package models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Représente les status possible d'une tâche
  *
@@ -26,4 +29,13 @@ public enum Status{
 		  return id;
 	  }
 	  
+		 
+	 public Map<String, String> getMap() {
+		 Map<String, String> map = new HashMap<>(); 
+		 map.put(String.valueOf(TODO.getId()), TODO.getName());
+		 map.put(String.valueOf(IN_PROGRESS.getId()), IN_PROGRESS.getName());
+		 map.put(String.valueOf(READY_FOR_TEST.getId()), READY_FOR_TEST.getName());
+		 map.put(String.valueOf(DONE.getId()), DONE.getName());
+		 return map;
+	 }
 }
