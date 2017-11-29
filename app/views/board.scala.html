@@ -11,7 +11,22 @@
 				}
 				@for(tsk <- param){
 					<tr>
-						<td>@tsk.getName @tsk.getStatus<td>
+						<td>@if(Status.TODO.getId() == tsk.status){
+								<a href="@route.controllers.BoardController.edit(tsk.id)">@tsk.name</a>
+							}
+						<td>
+						<td>@if(Status.IN_PROGRESS.getId() == tsk.status){
+								<a href="@route.controllers.BoardController.edit(tsk.id)">@tsk.name</a>
+							}
+						<td>
+						<td>@if(Status.READY_FOR_TEST.getId() == tsk.status){
+								<a href="@route.controllers.BoardController.edit(tsk.id)">@tsk.name</a>
+							}
+						<td>
+						<td>@if(Status.DONE.getId() == tsk.status){
+								<a href="@route.controllers.BoardController.edit(tsk.id)">@tsk.name</a>
+							}
+						<td>
 					</tr>
 				}
 			</thead>

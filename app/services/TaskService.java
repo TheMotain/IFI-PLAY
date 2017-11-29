@@ -30,8 +30,12 @@ public class TaskService {
     	return taskRepository.findAll();
     }
 
-	public void save(Task task) {
-		taskRepository.save(task);
+	public CompletionStage<Long> save(Task task) {
+		return taskRepository.save(task);
+	}
+
+	public Task find(Long id) {
+		return taskRepository.find(id);
 	}
     
 }

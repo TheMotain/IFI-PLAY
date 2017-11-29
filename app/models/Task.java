@@ -26,7 +26,7 @@ public class Task extends BaseModel{
 	 }
 	 
 	 @PrePersist
-	 void preInsert() {
+	 public void preInsert() {
 	    if (this.status == null)
 	        this.status = 1L;
 	 }

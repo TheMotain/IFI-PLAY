@@ -30,7 +30,13 @@ public class TaskRepository {
     			() -> {return ebeanServer.find(Task.class).findList();}, executionContext);
     }
 
-	public void save(Task task) {
-		ebeanServer.insert(task);
+	public CompletionStage<Long> save(Task task) {
+		return CompletableFuture.supplyAsync(
+				() -> {ebeanServer.insert(task);return task.id;}
+				,executionContext);
+	}
+
+	public Task find(Long id) {
+		return ebeanServer.find(Task.class).where().eq("id", id).findOne();
 	}
 }
