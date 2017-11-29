@@ -177,9 +177,20 @@
 
         <ol>
           <li>
-            Dans le controlleur, créer un objet <a href="form.html">formulaire</a> de type Task à l'aide de la factory.
+            Créer une nouvelle vue <code>create.scala.html</code>. N'oubliez pas d'ajouter le <code>@main(title) {...}</code> afin de récupérer le code html de base.
           </li>
-          <li>Dans la vue board, créez un formulaire de création de tâche associé à votre objet form à l'aide des <a href="form.html">helpers twirl</a>.</li>
+          <li>
+            Modifier le lien du bouton dans la vue board afin de rediriger vers la vue create.
+          </li>
+          <li>
+            Créer une nouvelle méthode <code>createForm()</code> dans le controlleur afin d'afficher cette vue. (ajoutez votre route dans le ficher routes)
+          </li>
+          <li>
+            Dans cette même méthode, créez un objet <a href="form.html"><code>Form</code></a> de type générique <code>Task</code> à l'aide de la factory.
+          </li>
+          <li>
+            Dans la vue create, créez un formulaire de création de tâche associé à votre objet form à l'aide des <a href="form.html">helpers twirl</a>.
+          </li>
           <li>
             Votre formulaire va pointer vers une action (une méthode d'un controller). <br />
             Créez donc votre méthode create() dans votre controller et faites pointer le formulaire vers cette méthode.<br />
