@@ -129,7 +129,7 @@
 				<li>
 					Itération - boucle for : <br>
 					<code>@for(s <- stories) { <br>
-						&nbsp;&nbsp;&nbsp;&nbsp;s.name<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;@s.name<br>
 					}</code><br>
 				</li>
 				<li>
@@ -137,7 +137,7 @@
 					<code>@if(stories.isEmpty()) { <br>
 						&nbsp;&nbsp;&nbsp;&nbsp;Vide<br>
 					} else {<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;stories.size();<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;@stories.size();<br>
 					}</code><br>
 				</li>
 				<li>
@@ -180,7 +180,7 @@
 			<code>@main(title = "Titre") {<br>
 			&nbsp;&nbsp&nbsp;&nbspcontent<br>
 			}</code><br>
-			Les blocs de contenu Html doivent être décrit dans des incolades. On peut également en ajouter <br>
+			Les blocs de contenu Html doivent être décrit dans des accolades. On peut également en ajouter <br>
 			<code>@(title: String)(sidebar: Html)(content: Html)</code>
 			<br><code>@main("home"){<br>&nbsp;&nbsp;&lt;nav>sidebar&lt;/nav><br>} {<br>&nbsp;&nbsp;&lt;div>content&lt;/div><br>}</code>
 		</div><br>

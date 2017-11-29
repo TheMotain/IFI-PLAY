@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>IFI Framework</title>
+  <!-- Bootstrap core CSS-->
+  <link href="web/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="web/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="web/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="web/css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">Play Framework</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="TP">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">TP</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="installation.html">
+            <i class="fa fa-fw fa-floppy-o"></i>
+            <span class="nav-link-text">Installation</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="controleur.html">
+            <i class="fa fa-fw fa-check-square-o"></i>
+            <span class="nav-link-text">Contrôleur</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="routage.html">
+            <i class="fa fa-fw fa-road"></i>
+            <span class="nav-link-text">Routage</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="twirl.html">
+            <i class="fa fa-fw fa-html5"></i>
+            <span class="nav-link-text">Twirl</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="ebean.html">
+            <i class="fa fa-fw fa-database"></i>
+            <span class="nav-link-text">Ebean</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="autres.html">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">Sessions et flash</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/HeleneMyr/IFI-PLAY">
+            <i class="fa fa-fw fa-github-square"></i>Github</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">IFI PlayFramework</a>
+        </li>
+        <li class="breadcrumb-item active">TP</li>
+      </ol>
+
+      <div>
+        <h2>Sessions et Flash</h2>
+        <p>
+          Play est un framework Stateless, cela signifie qu'il ne stock aucune donnée de l'utilisateur entre deux requêtes.<br />
+          Il a cependant une implémentation de session utilisant les cookies. Le cookie sera alors envoyé dans chaque requêtes, assurant ainsi le principe stateless.<br />
+          Play implémente également un système de "flash". les Flash sont des sortes de sessions valables uniquement pour la prochaine requête. <br />
+          Ce système est très pratique afin d'envoyer une erreur sur une autre page en s'assurant que l'erreur ne sera pas persistante en cas de rechargement de page.
+        </p>
+
+        <h3>Les Sessions</h3>
+        <p>
+          Les sessions sont accessibles dans les controlleurs via la fonction <code>session()</code>.<br />
+          Cette fonction permet de gérer un ensemble de clé-valeur. <br/>
+          <ul>
+            <li><code>session("clé", "valeur")</code> permet d'enregistrer une clé-valeur</li>
+            <li><code>session("clé")</code> permet de récupérer la valeur de la clé donné en paramètre.</li>
+            <li><code>session().remove("clé")</code> permet de supprimer l'ensemble clé-valeur.</li>
+          </ul>
+
+          Les sessions sont limités à 4Ko (taille d'un cookie). Les sessons sont très utiles afin d'identifier un utilisateur par exemple.
+        </p>
+
+        <h3>Les Flash</h3>
+        <p>
+          Les flash sont accessibles dans les controlleurs via la fonction <code>flash()</code>.<br />
+          Cette fonction permet de gérer un ensemble de clé-valeur. <br/>
+          <ul>
+            <li><code>flash("clé", "valeur")</code> permet d'enregistrer une clé-valeur</li>
+            <li><code>flash("clé")</code> permet de récupérer la valeur de la clé donné en paramètre.</li>
+          </ul>
+          Dans twirl, la fonction flash est aussi accessible sans avoir à la passer en paramètre. Elle s'utilise légèrement différemment :
+          <ul>
+            <li><code>@flash.get("clé")</code> pour récupérer la valeur</li>
+            <li><code>@flash.contains("clé")</code> pour vérifier que la clé existe.</li>
+          </ul>
+          Rappelez-vous, cette donnée n'est accessible que pour la prochaine requête !
+        </p>
+      </div>
+
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Louis - Alex - Hélène</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Bootstrap core JavaScript-->
+    <script src="web/vendor/jquery/jquery.min.js"></script>
+    <script src="web/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="web/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="web/vendor/chart.js/Chart.min.js"></script>
+    <script src="web/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="web/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="web/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="web/js/sb-admin-datatables.min.js"></script>
+    <script src="web/js/sb-admin-charts.min.js"></script>
+  </div>
+</body>
+
+</html>

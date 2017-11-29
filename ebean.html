@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>IFI Framework</title>
+  <!-- Bootstrap core CSS-->
+  <link href="web/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="web/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="web/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="web/css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">Play Framework</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="TP">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">TP</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="installation.html">
+            <i class="fa fa-fw fa-floppy-o"></i>
+            <span class="nav-link-text">Installation</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="controleur.html">
+            <i class="fa fa-fw fa-check-square-o"></i>
+            <span class="nav-link-text">Contrôleur</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="routage.html">
+            <i class="fa fa-fw fa-road"></i>
+            <span class="nav-link-text">Routage</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="twirl.html">
+            <i class="fa fa-fw fa-html5"></i>
+            <span class="nav-link-text">Twirl</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="ebean.html">
+            <i class="fa fa-fw fa-database"></i>
+            <span class="nav-link-text">Ebean</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="autres.html">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">Sessions et flash</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/HeleneMyr/IFI-PLAY">
+            <i class="fa fa-fw fa-github-square"></i>Github</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">IFI PlayFramework</a>
+        </li>
+        <li class="breadcrumb-item active">TP</li>
+      </ol>
+
+      <div>
+        <h2>L'ORM Ebean</h2>
+        <p>
+          Play contient le plugin Ebean par défaut. Ebean est un ORM destiné à être utilisé avec les langages Java et Kotlin.
+        </p>
+
+        <h3>Utilisation de Ebean</h3>
+        <p>
+          Pout utiliser les fonctionnalités de Ebean, il va falloir injecter le <code>EbeanServer</code> pour en utiliser ses fonctions.<br />
+          Pour cela, ajouter à votre classe un attribut <code>private final EbeanServer ebeanServer;</code> et l'annotation <code>@Inject</code> à votre constructeur. <br />
+          De même, ajoutez l'objet à votre constructeur.
+        </p>
+
+        <p>
+          Ebean utilise le concept d'objet Modèle annoté afin de mapper les champs de la table avec les attributs de l'objet. <br />
+          Par exemple : <br />
+          <code>
+
+          @Entity<br />
+          public class Us extends BaseModel<br />
+            &nbsp;&nbsp;@Constraints.Required<br />
+            &nbsp;&nbsp;public String name;<br />
+            &nbsp;&nbsp;public String description;<br />
+          }
+          </code>
+        </p>
+
+        <h3>Select dans la base</h3>
+        <p>
+          Les requêtes SELECT se font en suivant ce modèle :<br />
+          <code>ebeanServer.find(MonModèle.class).findList();</code><br />
+          La fonction <code>find</code> permet de spécifier la table du select (ici la table correspondant au modèle <code>Mon Modèle</code><br />
+          La fonction <code>findList</code> correspont à un SELECT *.<br />
+          Il existe de nombreuses fonction pour filter, trier etc tel que :<br />
+          <ul>
+            <li><code>.where().eq("id", id)</code> pour effectuer un WHERE id=id </li>
+            <li><code>.orderBy("name")</code> pour effectuer un OrderBy</li>
+            <li><code>.findOne()</code> pour selectionner que le premier élément retourné</li>
+          </ul>
+        </p>
+
+        <h3>Insertion et Mise à jour</h3>
+        <p>
+          L'insertion d'objet et leur mise à jour se fait simplement à l'aide de la fonction <code>.insert(myModel)</code> ou <code>.update(myModel)</code>.<br />
+          Le binding des champs de l'objet et des champs de la table se fait automatiquement avec les annotations dans le modèle.
+        </p>
+
+        <h3>Principe de l'asynchrone</h3>
+        <p>
+          Ebean est par défaut synchrone. Ce qui veut dire que la requête va bloquer l'execution du thread.<br />
+          Pour des raisons de performance lié à Play, il est préférable de modifier ce comportement en asynchrone.<br />
+          Pour cela, il est possible d'englober notre code dans un bloc asyncrhone à l'aide de la fonction <code>supplyAsync</code>.<br />
+          Cette fonction prends un lamda en paramètre contenant le code à executer en asyncrhone en premier paramètre et un contexte d'execution en second paramètre.<br />
+          Le contexte d'execution de ebean est à injecter de la même façon que l'objet <code>EbeanServer</code> et est de type <code>DatabaseExecutionContext</code>
+        </p>
+        <p>
+          Exemple :<br />
+          <code>
+            supplyAsync(() -> {<br />
+              return "coucou";<br />
+            }, executionContext);<br />
+          </code>
+        </p>
+        <p>
+          La fonction supplyAsync va retourner un objet de type <code>CompletionStage&lt;T></code> où T est le type de retour du lambda. (Ici, <code>CompletionStage&lt;String></code>)<br />
+          Il faudra alors répercuter ce changement sur les fonction appelantes (dans le service).<br />
+        </p>
+      </div>
+
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Louis - Alex - Hélène</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Bootstrap core JavaScript-->
+    <script src="web/vendor/jquery/jquery.min.js"></script>
+    <script src="web/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="web/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="web/vendor/chart.js/Chart.min.js"></script>
+    <script src="web/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="web/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="web/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="web/js/sb-admin-datatables.min.js"></script>
+    <script src="web/js/sb-admin-charts.min.js"></script>
+  </div>
+</body>
+
+</html>
