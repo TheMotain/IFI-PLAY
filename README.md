@@ -1,25 +1,11 @@
-[<img src="https://img.shields.io/travis/playframework/play-java-ebean-example.svg"/>](https://travis-ci.org/playframework/play-java-ebean-example)
+#TP TaskBoard 
+MASTER IAGL
+Louis GUILBERT, Alex DALENCOURT, Hélène MEYER
 
-# play-java-ebean-example
+Pour accéder au TP et à la documentation : [https://helenemyr.github.io/IFI-PLAY/](https://helenemyr.github.io/IFI-PLAY/#)
 
-This is an example Play application that uses Java, and communicates with an in memory database using EBean.
+Pour lancer l'application: 
 
-The Github location for this project is:
+	./sbt run
 
-[https://github.com/playframework/play-java-ebean-example](https://github.com/playframework/play-java-ebean-example)
-
-## Play
-
-Play documentation is here:
-
-[https://playframework.com/documentation/latest/Home](https://playframework.com/documentation/latest/Home)
-
-## EBean
-
-EBean is a Java ORM library that uses SQL:
-
-[https://www.playframework.com/documentation/latest/JavaEbean](https://www.playframework.com/documentation/latest/JavaEbean)
-
-and the documentation can be found here:
-
-[https://ebean-orm.github.io/](https://ebean-orm.github.io/)
+Pour voir l'application : [http://localhost:9000](http://localhost:9000)
