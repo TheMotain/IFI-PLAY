@@ -69,6 +69,12 @@
             <span class="nav-link-text">Sessions et flash</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="form.html">
+            <i class="fa fa-fw fa-wpforms"></i>
+            <span class="nav-link-text">Formulaire</span>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -117,14 +123,14 @@
 			<div class="col-md-12">
 				<p>Le routage inverse est utilisé pour générer une URL à partir d'un appel Java.
 				<br>Pour chaque contrôleur, on a un 'reverse controller' dans le 'routes'</p>
-				
+
 				<p>Par exemple, si on a <br>
 				<code>GET &nbsp;&nbsp; /client/:name &nbsp;&nbsp;&nbsp;&nbsp; controllers.Clients.get(name: String)</code>
 				<br>
 				On peut inverser l'URL : <code>controllers.routes.Clients.get("Name")</code><br>
 				On peut l'utiliser dans la méthode : <code>redirect()</code>
 				</p>
-				
+
 			</div>
 		</div>
       </div>

@@ -69,6 +69,12 @@
             <span class="nav-link-text">Sessions et flash</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Installation">
+          <a class="nav-link" href="form.html">
+            <i class="fa fa-fw fa-wpforms"></i>
+            <span class="nav-link-text">Formulaire</span>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -100,10 +106,10 @@
         <p>Play est livré avec Twirl qui est basé sur Scala.<br><br>
 		Le typage des paramètres est spécifié en utilisant une syntaxe de suffixe<br>
 		Les types génériques doivent être défini avec des [] et non des <></p>
-		
+
 		<h5>Exemples</h5>
 		<div class="col-md-12">
-			<p>Le nom d'un fichier doit avoir la forme suivante : nom.scala.html 
+			<p>Le nom d'un fichier doit avoir la forme suivante : nom.scala.html
 			<br>
 			Lors de la création de ce fichier, une vue : views.html.Application.nom est créée avec la méthode render().
 			<br>
@@ -122,7 +128,7 @@
 			<strong>Il ne faut pas mettre d'espaces entre les mots clés et les paramètres</strong><br><br>
 			Pour afficher le caractère '@', il suffit de mettre '@@'
 		</div>
-		
+
 		<h5>Code</h5>
 		<div class="col-md-12">
 			<ul>
@@ -145,7 +151,7 @@
 				</li>
 			</ul>
 		</div>
-		
+
 		<h5>Blocs réutilisables</h5>
 		<div class="col-md-12">
 			<code>@display(story: Story) = {<br>
@@ -162,7 +168,7 @@
 		<h5>Utilisation des modèles en commun</h5>
 		<div class="col-md-12">
 			Un modèle 'views/main.scala.html' sera utilisé pour le modèle de présentation général:<br>
-			
+
 			<code>
 				@(title: String)(content: Html)<br>
 				&lt;!DOCTYPE html><br>
@@ -184,7 +190,7 @@
 			<code>@(title: String)(sidebar: Html)(content: Html)</code>
 			<br><code>@main("home"){<br>&nbsp;&nbsp;&lt;nav>sidebar&lt;/nav><br>} {<br>&nbsp;&nbsp;&lt;div>content&lt;/div><br>}</code>
 		</div><br>
-		
+
 		<h5>Formulaire</h5>
 		<div class="col-md-12">
 			Lors de la création d'un formulaire, on doit tout d'abord définir l'objet avec ses contraintes : <code>play.data.validation.Contraints</code><br>
