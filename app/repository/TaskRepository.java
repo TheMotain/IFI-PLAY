@@ -69,7 +69,6 @@ public class TaskRepository {
 	public CompletionStage<Long> update(Task task, Long id) {
 		return CompletableFuture.supplyAsync(
 				() -> {ebeanServer.update(task);
-				System.out.println("here" + task.description + " " + task.name + " " + task.status);
 				Task savedTask = ebeanServer.find(Task.class).setId(id).findUnique();
                 if (savedTask != null) {
                     savedTask.description = task.description;
