@@ -1,12 +1,21 @@
-@(taskForm: Form[Task])
+@(taskForm: Form[Task], status: Map[String, String], idTask: Long)
 @import helper._
 @main("Create task"){
 	@if(flash.contains("errors")){
 		@flash.get("errors")
 	}
-	@form(action = routes.BoardController.create()){
+	@form(action = routes.BoardController.update(idTask)){
 		@CSRF.formField
 		@inputText(taskForm("name"), 'id->"name")
+		@inputText(taskForm("description"), 'id->"description")
+		
+		@select(
+		  taskForm("status"), 
+		  options(status),
+		  '_label -> "Status", '_default -> "-- Choisir un status --",
+		  '_showConstraints -> false
+		)
+		
 		<input type="submit"/>
 	}
 }

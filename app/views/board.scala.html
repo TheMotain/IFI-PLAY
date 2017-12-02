@@ -5,34 +5,66 @@
 		<div class="col-md-10">
 		<table class="table">
 			<thead>
+			<tr>
 				<!-- Récupération de tous les status possible pour une tâche (Status -> models.Status)  -->
 				@for(sta <- Status.values()) {
 					<th id="@sta.getId()">@sta.getName()</th>
 				}
-				@for(tsk <- param){
-					<tr>
-						<td>@if(Status.TODO.getId() == tsk.status){
-								<a href="@route.controllers.BoardController.edit(tsk.id)">@tsk.name</a>
-							}
-						<td>
-						<td>@if(Status.IN_PROGRESS.getId() == tsk.status){
-								<a href="@route.controllers.BoardController.edit(tsk.id)">@tsk.name</a>
-							}
-						<td>
-						<td>@if(Status.READY_FOR_TEST.getId() == tsk.status){
-								<a href="@route.controllers.BoardController.edit(tsk.id)">@tsk.name</a>
-							}
-						<td>
-						<td>@if(Status.DONE.getId() == tsk.status){
-								<a href="@route.controllers.BoardController.edit(tsk.id)">@tsk.name</a>
-							}
-						<td>
-					</tr>
-				}
+				</tr>
 			</thead>
 			<tbody>
+			
 				<!-- Listez les tâches ici -->
-			</tbody>
+				@for(tsk <- param){
+				<tr>
+
+				 	<td>
+				  	<!-- Afficher ici seulement si le status de la tâche vaut Status.TODO.getId() -->
+				  	@if(Status.TODO.getId() == tsk.status){
+					  	<div class="col-md-12">
+					   	<a href="@routes.BoardController.edit(tsk.id)">Nom : @tsk.name
+					   	<br>
+					   	Description : @tsk.description</a>
+					  	</div>
+				  	}
+				 	</td>
+				
+				 	<td>
+				  	<!-- Afficher ici seulement si le status de la tâche vaut Status.IN_PROGRESS.getId() -->
+				  	@if(Status.IN_PROGRESS.getId() == tsk.status){
+					  	<div class="col-md-12">
+					   	<a href="@routes.BoardController.edit(tsk.id)">Nom :@tsk.name
+					   	<br>
+					   	Description : @tsk.description</a>
+				  		</div>
+				  	}
+				 	</td>
+				
+				 	<td>
+				  	<!-- Afficher ici seulement si le status de la tâche vaut Status.READY_FOR_TEST.getId() -->
+				  	@if(Status.READY_FOR_TEST.getId() == tsk.status){
+					  	<div class="col-md-12">
+					   	<a href="@routes.BoardController.edit(tsk.id)">Nom : @tsk.name
+					   	<br>
+					   	Description : @tsk.description</a>
+					  	</div>
+					}
+				 	</td>
+				
+				 	<td>
+				  	<!-- Afficher ici seulement si le status de la tâche vaut Status.DONE.getId() -->
+				  	@if(Status.DONE.getId() == tsk.status){
+					  	<div class="col-md-12">
+					   	<a href="@routes.BoardController.edit(tsk.id)">Nom :@tsk.name
+					   	<br>
+					   	Description :@tsk.description</a>
+					  	</div>
+				  	}
+				 	</td>
+				
+				</tr>
+				}
+				</tbody>
 		</table>
 		</div>
 		<div class="col-md-2">

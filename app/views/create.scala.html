@@ -7,6 +7,7 @@
 	@form(action = routes.BoardController.create()){
 		@CSRF.formField
 		@inputText(taskForm("name"), 'id->"name")
+		@inputText(taskForm("description"), 'id->"description")
 		<input type="submit"/>
 	}
 }
